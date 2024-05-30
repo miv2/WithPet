@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: toy-server
+
+  datasource:
+    url: jdbc:mariadb://210.115.230.154:59010/app_server
+    username: miv
+    password: 1234
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
