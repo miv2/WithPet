@@ -1,3 +1,6 @@
+server:
+  port: 59020
+
 spring:
   application:
     name: toy-server
