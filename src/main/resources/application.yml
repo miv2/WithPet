@@ -6,7 +6,7 @@ spring:
     name: toy-server
 
   datasource:
-    url: jdbc:mariadb://210.115.230.154:59010/app_server
+    url: jdbc:mariadb://localhost:59010/app_server
     username: miv
     password: 1234
 
