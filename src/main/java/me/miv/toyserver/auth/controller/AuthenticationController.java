@@ -23,7 +23,7 @@ public class AuthenticationController {
         this.authenticationService = authenticationService;
     }
 
-    @Operation(summary = "회원가입", description = "유저 회원가입")
+    //@Operation(summary = "회원가입", description = "유저 회원가입")
     @PostMapping("/sign-up")
     public ApplicationResponse signUp(@RequestBody SignUpRequest signUpRequest) {
         authenticationService.signUp(signUpRequest);
