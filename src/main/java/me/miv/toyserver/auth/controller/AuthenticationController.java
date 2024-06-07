@@ -1,12 +1,9 @@
 package me.miv.toyserver.auth.controller;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import me.miv.toyserver.auth.dto.request.LoginRequest;
 import me.miv.toyserver.auth.dto.request.SignUpRequest;
 import me.miv.toyserver.auth.service.AuthenticationService;
 import me.miv.toyserver.common.response.ApplicationResponse;
-import me.miv.toyserver.common.response.ApplicationResult;
 import me.miv.toyserver.member.service.MemberService;
 import me.miv.toyserver.security.exception.MemberAuthenticationException;
 import org.springframework.web.bind.annotation.*;
