@@ -1,5 +1,6 @@
 package me.miv.toyserver.AppInformation;
 
+import com.querydsl.jpa.impl.JPAQuery;
 import me.miv.toyserver.common.response.ApplicationResponse;
 import me.miv.toyserver.common.response.ApplicationResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,8 +18,8 @@ public class AppInformationController {
     }
 
     @GetMapping
-    public ApplicationResponse getAppVersion() {
-        return new ApplicationResponse(ApplicationResult.ok("앱버전 조회"), appInformationService.getAppVersion());
+    public ApplicationResponse<AppInformation> getAppVersion() {
+        return ApplicationResponse.ok("앱버전 조회", appInformationService.getAppVersion());
     }
 
 }
