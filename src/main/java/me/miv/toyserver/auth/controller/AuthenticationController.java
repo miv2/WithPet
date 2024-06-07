@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/auth")
-@Tag(name = "User API", description = "User API 입니다.")
+//@Tag(name = "User API", description = "User API 입니다.")
 public class AuthenticationController {
     private final MemberService memberService;
     private final AuthenticationService authenticationService;
