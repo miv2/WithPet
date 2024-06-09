@@ -1,5 +1,6 @@
 package me.miv.toyserver.auth.controller;
 
+import jakarta.servlet.http.HttpServletResponse;
 import me.miv.toyserver.auth.dto.request.LoginRequest;
 import me.miv.toyserver.auth.dto.request.SignUpRequest;
 import me.miv.toyserver.auth.service.AuthenticationService;
@@ -28,8 +29,9 @@ public class AuthenticationController {
     }
 
     @PostMapping("/sign-in")
-    public ApplicationResponse signIn(@RequestBody LoginRequest loginRequest) {
-        return ApplicationResponse.ok("로그인", authenticationService.authentication(loginRequest));
+    public ApplicationResponse signIn(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
+        authenticationService.authentication(loginRequest, response);
+        return ApplicationResponse.ok("로그인",  "");
     }
 
     @GetMapping("/check/duplicate")

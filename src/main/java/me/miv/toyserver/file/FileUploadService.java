@@ -18,7 +18,7 @@ public class FileUploadService {
 
     //public static final String PATH = "C:\\Users\\cu_bo\\OneDrive\\바탕 화면\\media\\images";
     public static final String PATH = "/home/git/withPet/images";
-    public static final String test = "C:/Users/cu_bo/OneDrive/바탕 화면";
+    public static final String TEST = "C:/Users/cu_bo/OneDrive/바탕 화면";
 
     public String fileUpload(MultipartFile multipartFile) {
         String originalFilename = multipartFile.getOriginalFilename();
@@ -46,7 +46,7 @@ public class FileUploadService {
 
         try {
             Files.copy(multipartFile.getInputStream(), copyOfLocation, StandardCopyOption.REPLACE_EXISTING);
-            return Path.of("/media", "/images", newFileName).toString();
+            return Path.of("", "/images", newFileName).toString();
         } catch (IOException e) {
             e.printStackTrace();
             throw new IllegalArgumentException("Could not store file: " + originalFilename);

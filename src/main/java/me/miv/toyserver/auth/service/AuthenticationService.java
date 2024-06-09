@@ -1,5 +1,6 @@
 package me.miv.toyserver.auth.service;
 
+import jakarta.servlet.http.HttpServletResponse;
 import me.miv.toyserver.auth.dto.request.LoginRequest;
 import me.miv.toyserver.auth.dto.request.SignUpRequest;
 import me.miv.toyserver.member.domain.Member;
@@ -15,6 +16,8 @@ import me.miv.toyserver.security.service.JwtTokenService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
 
 
 @Service
@@ -43,7 +46,7 @@ public class AuthenticationService {
         memberService.save(member);
     }
 
-    public TokenResponse authentication(LoginRequest loginRequest) {
+    public void authentication(LoginRequest loginRequest, HttpServletResponse response) {
         // 회원 찾기
         Member findMember = memberService.getMemberOrNullByLoginId(loginRequest.getLoginId())
                 .orElseThrow(() -> new MemberAuthenticationException(INVALID_PASSWORD));
@@ -72,7 +75,9 @@ public class AuthenticationService {
                 false)
         );
 
-        return tokenResponse;
+        response.setHeader("X-ACCESS-TOKEN", tokenResponse.getAccessToken());
+        response.setHeader("X-REFRESH-TOKEN", tokenResponse.getRefreshToken());
+        response.setHeader("X-TOKEN-TIME", tokenResponse.getExpireRefreshTokenTime().toString());
     }
 
     public TokenResponse generateTokenByRefreshToken(String refreshToken) {
