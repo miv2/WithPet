@@ -2,8 +2,9 @@ package me.miv.toyserver.member.enumeration;
 
 public enum RoleType {
 
-    ROLE_ADMIN("어드민"),
-    ROLE_USER("유저");
+    ROLE_ADMIN("admin"),
+    ROLE_USER("initial"),
+    ROLE_NORMAL("normal");
 
     private final String value;
 
