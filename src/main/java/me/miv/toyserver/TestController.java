@@ -24,13 +24,13 @@ public class TestController {
 
     @GetMapping
     public ApplicationResponse getTest() {
-        return new ApplicationResponse(ApplicationResult.ok("테스트"), "");
+        System.out.println("테스트");
+        return ApplicationResponse.ok("Test API", "");
     }
 
     @PostMapping("/upload")
     public ApplicationResponse test(@RequestPart("image") MultipartFile multipartFile) {
         String filePath = fileUploadService.fileUpload(multipartFile);
-        System.out.println("File url : " + FileUploadService.test);
         System.out.println("File path : " + filePath);
         return new ApplicationResponse<>(ApplicationResult.ok("파일 업로드 완료"), "test");
     }
