@@ -31,6 +31,10 @@ public class JwtToken extends TimeAuditingBaseEntity {
         this.isExpired = isExpired;
     }
 
+    public JwtToken() {
+
+    }
+
     public Long getId() {
         return id;
     }

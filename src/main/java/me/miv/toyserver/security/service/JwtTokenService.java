@@ -36,6 +36,7 @@ public class JwtTokenService {
     }
 
     public boolean checkRefreshTokenExpired(String loginId, String refreshToken) {
+        System.out.println("checkRefreshTokenExpired loginId ::: " + loginId);
         JwtToken findToken = jwtTokenRepository.getTokenByLoginId(loginId);
         return findToken == null || findToken.getRefreshToken() != refreshToken;
     }

@@ -27,21 +27,19 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         logger.info(request.getHeader("X-ACCESS-TOKEN"));
         logger.info(request.getHeader("X-REFRESH-TOKEN"));
 
-        if(accessToken != null && !accessToken.isEmpty() && jwtTokenProvider.validateToken(accessToken)) {
+        if(!accessToken.isBlank() && jwtTokenProvider.validateToken(accessToken)) {
             String loginId = jwtTokenProvider.getLoginId(accessToken);
             Boolean checkAccessTokenExpired = jwtTokenService.checkAccessTokenExpired(loginId, accessToken);
-
-            if(!checkAccessTokenExpired) {
+            if(checkAccessTokenExpired) {
                 SecurityContextHolder.getContext().setAuthentication(jwtTokenProvider.getAuthentication(accessToken));
             }
         }
 
         // 리프레쉬 토큰 만료시 업데이트
-        if(refreshToken != null && !refreshToken.isEmpty() && !jwtTokenProvider.validateToken(refreshToken)) {
+        if(!refreshToken.isBlank() && !jwtTokenProvider.validateToken(refreshToken)) {
             String loginId = jwtTokenProvider.getLoginId(refreshToken);
             jwtTokenService.expireTokenByLoginId(loginId);
         }
-
         filterChain.doFilter(request, response);
     }
 

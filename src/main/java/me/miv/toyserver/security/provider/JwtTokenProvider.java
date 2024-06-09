@@ -51,25 +51,41 @@ public class JwtTokenProvider {
 
     public String getLoginId(String token) {
         try {
-            Jws<Claims> claimsJws = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
-            return claimsJws.getBody().get("[loginId]", String.class);
+/*            Jws<Claims> claimsJws = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+            return claimsJws.getBody().get("loginId", String.class);*/
+
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+            return claims.get("loginId").toString();
         } catch (ExpiredJwtException e) {
-            return e.getClaims().get("[loginId]", String.class);
+            return e.getClaims().get("loginId", String.class);
         }
     }
 
     public String getRole(String token) {
         try {
-            Jws<Claims> claimsJws = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
-            return claimsJws.getBody().get("[role]", String.class);
+/*            Jws<Claims> claimsJws = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
+            return claimsJws.getBody().get("role", String.class);*/
+
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+            return claims.get("role").toString();
         } catch (ExpiredJwtException e) {
-            return e.getClaims().get("[role]", String.class);
+            return e.getClaims().get("role", String.class);
         }
     }
 
     public TokenResponse createToken(Member member) {
         String loginId = member.getLoginId();
         String role = member.getRole() != null ? member.getRole().getRoleType().toString() : "";
+        System.out.println("[createToken] 토큰 생성 loginId : " + loginId);
+        System.out.println("[createToken] 토큰 생성 role : " + role);
 
         Date now = new Date();
         Date accessTokenExpiredTime = new Date(now.getTime() + accessTokenTime);
@@ -78,8 +94,8 @@ public class JwtTokenProvider {
     }
 
     public TokenResponse createAccessTokenByRefreshToken(String token) {
-        Jws<Claims> claimsJws = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
-        Date refreshExpired = claimsJws.getBody().getExpiration();
+        Claims claims = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
+        Date refreshExpired = claims.getExpiration();
 
         String loginId = getLoginId(token);
         String role = getRole(token);
@@ -128,11 +144,19 @@ public class JwtTokenProvider {
 
     public Boolean validateToken(String token) {
         try {
-            Jws<Claims> claimsJws = Jwts.parserBuilder()
+/*            Jws<Claims> claimsJws = Jwts.parserBuilder()
                     .setSigningKey(key)
                     .build()
                     .parseClaimsJws(token);
-            return !claimsJws.getBody().getExpiration().before(new Date());
+            return !claimsJws.getBody().getExpiration().before(new Date());*/
+
+            Claims claims = Jwts.parserBuilder()
+                    .setSigningKey(key)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+            return !claims.getExpiration().before(new Date());
+
         } catch (Exception e) {
             return false;
         }

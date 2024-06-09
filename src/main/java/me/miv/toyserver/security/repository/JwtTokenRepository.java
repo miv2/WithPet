@@ -47,7 +47,10 @@ public class JwtTokenRepository {
     public JwtToken getTokenByLoginId(String loginId) {
         return jpaQueryFactory
                 .selectFrom(jwtToken)
-                .where(jwtToken.loginId.eq(loginId).and(jwtToken.isExpired.eq(false)))
+                .where(
+                        jwtToken.loginId.eq(loginId)
+                        .and(jwtToken.isExpired.eq(false))
+                )
                 .fetchOne();
     }
 
