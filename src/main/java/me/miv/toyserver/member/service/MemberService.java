@@ -48,8 +48,9 @@ public class MemberService {
     }
 
     @Transactional
-    public void save(Member member) {
-        memberJpaRepository.save(member);
+    public Member save(Member member) {
+        Member saveMember = memberJpaRepository.save(member);
+        return saveMember;
     }
 
     public Boolean existsLoginId(String loginId) {

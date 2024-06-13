@@ -36,14 +36,16 @@ public class AuthenticationService {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 
-    public void signUp(SignUpRequest signUpRequest) {
+    public Long signUp(SignUpRequest signUpRequest) {
         signUpRequest.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
 
         Role userRole = memberService.getRoleByType(RoleType.ROLE_USER);
 
         Member member = new Member(signUpRequest, userRole);
 
-        memberService.save(member);
+        Member saveMember = memberService.save(member);
+
+        return saveMember.getId();
     }
 
     public void authentication(LoginRequest loginRequest, HttpServletResponse response) {

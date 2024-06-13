@@ -24,8 +24,7 @@ public class AuthenticationController {
     //@Operation(summary = "회원가입", description = "유저 회원가입")
     @PostMapping("/sign-up")
     public ApplicationResponse signUp(@RequestBody SignUpRequest signUpRequest) {
-        authenticationService.signUp(signUpRequest);
-        return ApplicationResponse.ok("회원가입", "");
+        return ApplicationResponse.ok("회원가입", authenticationService.signUp(signUpRequest));
     }
 
     @PostMapping("/sign-in")
