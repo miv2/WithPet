@@ -41,4 +41,31 @@ public class Pet extends TimeAuditingBaseEntity {
         this.memberId = petAddRequest.getMemberId();
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getProfileImage() {
+        return profileImage;
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public Long getMemberId() {
+        return memberId;
+    }
 }

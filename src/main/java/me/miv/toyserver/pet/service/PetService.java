@@ -20,8 +20,18 @@ public class PetService {
         this.fileUploadService = fileUploadService;
     }
 
+    public Pet getUserPetInfo(Long memberId) {
+        return petJpaRepository.findByMemberId(memberId);
+    }
+
     @Transactional
-    public void addUserPetInto(PetAddRequest petAddRequest, MultipartFile profileImage) {
+    public String addUserPetInto(PetAddRequest petAddRequest, MultipartFile profileImage) throws Exception {
+        Boolean existsByMemberId = petJpaRepository.existsByMemberId(petAddRequest.getMemberId());
+
+        if(existsByMemberId) {
+            Exception exception = new Exception("이미 등록된 정보가 있습니다.");
+            return exception.getMessage();
+        }
 
         String imageFileName = "";
 
@@ -32,5 +42,6 @@ public class PetService {
         Pet pet = new Pet(petAddRequest, imageFileName);
 
         petJpaRepository.save(pet);
+        return "반려견 정보가 입력되었습니다.";
     }
 }
