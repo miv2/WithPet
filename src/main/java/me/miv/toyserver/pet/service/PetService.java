@@ -1,8 +1,11 @@
 package me.miv.toyserver.pet.service;
 
-import io.jsonwebtoken.lang.Objects;
 import me.miv.toyserver.file.FileUploadService;
 import me.miv.toyserver.member.domain.Member;
+import me.miv.toyserver.member.domain.Role;
+import me.miv.toyserver.member.enumeration.RoleType;
+import me.miv.toyserver.member.repository.MemberJpaRepository;
+import me.miv.toyserver.member.repository.RoleRepository;
 import me.miv.toyserver.pet.domain.Pet;
 import me.miv.toyserver.pet.dto.request.PetAddRequest;
 import me.miv.toyserver.pet.repository.PetJpaRepository;
@@ -14,10 +17,14 @@ import org.springframework.web.multipart.MultipartFile;
 public class PetService {
     private final PetJpaRepository petJpaRepository;
     private final FileUploadService fileUploadService;
+    private final RoleRepository roleRepository;
+    private final MemberJpaRepository memberJpaRepository;
 
-    public PetService(PetJpaRepository petJpaRepository, FileUploadService fileUploadService) {
+    public PetService(PetJpaRepository petJpaRepository, FileUploadService fileUploadService, RoleRepository roleRepository, MemberJpaRepository memberJpaRepository) {
         this.petJpaRepository = petJpaRepository;
         this.fileUploadService = fileUploadService;
+        this.roleRepository = roleRepository;
+        this.memberJpaRepository = memberJpaRepository;
     }
 
     public Pet getUserPetInfo(Long memberId) {
@@ -25,7 +32,7 @@ public class PetService {
     }
 
     @Transactional
-    public String addUserPetInto(PetAddRequest petAddRequest, MultipartFile profileImage) throws Exception {
+    public String addUserPetInto(PetAddRequest petAddRequest, MultipartFile profileImage, Member member) throws Exception {
         Boolean existsByMemberId = petJpaRepository.existsByMemberId(petAddRequest.getMemberId());
 
         if(existsByMemberId) {
@@ -40,8 +47,12 @@ public class PetService {
         }
 
         Pet pet = new Pet(petAddRequest, imageFileName);
-
         petJpaRepository.save(pet);
+
+        // 등급 변경
+        Role roleByType = roleRepository.findRoleByType(RoleType.ROLE_NORMAL);
+        member.setRole(roleByType);
+        memberJpaRepository.save(member);
         return "반려견 정보가 입력되었습니다.";
     }
 }

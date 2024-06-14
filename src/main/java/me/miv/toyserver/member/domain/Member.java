@@ -74,4 +74,7 @@ public class Member extends TimeAuditingBaseEntity {
         return role;
     }
 
+    public void setRole(Role role) {
+        this.role = role;
+    }
 }
