@@ -1,9 +1,9 @@
-package me.miv.toyserver.AppInformation;
+package me.miv.toyserver.appInformation;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
 
-import static me.miv.toyserver.AppInformation.QAppInformation.appInformation;
+import static me.miv.toyserver.appInformation.QAppInformation.appInformation;
 
 @Repository
 public class AppInformationRepository {

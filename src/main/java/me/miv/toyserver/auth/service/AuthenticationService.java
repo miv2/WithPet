@@ -17,8 +17,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-
 
 @Service
 public class AuthenticationService {
@@ -37,6 +35,13 @@ public class AuthenticationService {
     }
 
     public Long signUp(SignUpRequest signUpRequest) {
+        String loginId = signUpRequest.getLoginId();
+        Boolean existsLoginId = memberService.existsLoginId(loginId);
+
+        if(existsLoginId) {
+            throw new IllegalArgumentException("아이디가 존재합니다.");
+        }
+
         signUpRequest.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
 
         Role userRole = memberService.getRoleByType(RoleType.ROLE_USER);

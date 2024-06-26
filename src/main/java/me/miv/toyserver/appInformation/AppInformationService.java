@@ -1,6 +1,5 @@
-package me.miv.toyserver.AppInformation;
+package me.miv.toyserver.appInformation;
 
-import com.querydsl.jpa.impl.JPAQuery;
 import org.springframework.stereotype.Service;
 
 @Service

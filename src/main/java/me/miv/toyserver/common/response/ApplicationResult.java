@@ -2,22 +2,7 @@ package me.miv.toyserver.common.response;
 
 import org.springframework.http.HttpStatus;
 
-public class ApplicationResult {
-    private final int code;
-    private final String message;
-
-    public ApplicationResult(int code, String message) {
-        this.code = code;
-        this.message = message;
-    }
-
-    public int getCode() {
-        return code;
-    }
-
-    public String getMessage() {
-        return message;
-    }
+public record ApplicationResult(int code, String message) {
 
     public static ApplicationResult ok(String message) {
         return new ApplicationResult(HttpStatus.OK.value(), message);

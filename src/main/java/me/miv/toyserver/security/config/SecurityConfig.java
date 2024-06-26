@@ -49,6 +49,9 @@ public class SecurityConfig {
                                 .requestMatchers("/api/v1/test/**").permitAll()
                                 .requestMatchers("/api/v1/auth/**").permitAll()
                                 .requestMatchers("/api/v1/version/**").permitAll()
+                                .requestMatchers("/api/v1/member/**").permitAll()
+                                .requestMatchers("/api/v1/pet-info/save").permitAll()
+
                                 .anyRequest().authenticated()
                 )
                 .csrf(AbstractHttpConfigurer::disable)
@@ -83,7 +86,7 @@ public class SecurityConfig {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.addAllowedHeader("*");
         corsConfiguration.addAllowedMethod("*");
-        corsConfiguration.addAllowedOrigin("http://localhost:8080");
+        corsConfiguration.addAllowedOrigin("http://localhost:59020");
         corsConfiguration.addAllowedOrigin("http://localhost:3000");
         corsConfiguration.setAllowCredentials(true);
 

@@ -24,6 +24,14 @@ public class MemberRepository {
                 .fetchOne();
     }
 
+    public Member findByMemberId(Long memberId) {
+        return jpaQueryFactory.selectFrom(member)
+                .join(member.role)
+                .fetchJoin()
+                .where(member.id.eq(memberId))
+                .fetchOne();
+    }
+
     public Optional<Member> findByLoginIdOrNull(String loginId) {
         return Optional.ofNullable(jpaQueryFactory.selectFrom(member)
                 .join(member.role)

@@ -41,6 +41,15 @@ public class Pet extends TimeAuditingBaseEntity {
         this.memberId = petAddRequest.getMemberId();
     }
 
+    public void updatePet(PetAddRequest petAddRequest, String imageFileName) {
+        this.size = petAddRequest.getSize();
+        this.age = petAddRequest.getAge();
+        this.profileImage = imageFileName;
+        this.sex = petAddRequest.getSex();
+        this.introduction = petAddRequest.getIntroduction();
+        this.memberId = petAddRequest.getMemberId();
+    }
+
     public Long getId() {
         return id;
     }
@@ -67,5 +76,25 @@ public class Pet extends TimeAuditingBaseEntity {
 
     public Long getMemberId() {
         return memberId;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setProfileImage(String profileImage) {
+        this.profileImage = profileImage;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
     }
 }

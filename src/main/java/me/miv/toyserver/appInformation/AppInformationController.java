@@ -1,8 +1,6 @@
-package me.miv.toyserver.AppInformation;
+package me.miv.toyserver.appInformation;
 
-import com.querydsl.jpa.impl.JPAQuery;
 import me.miv.toyserver.common.response.ApplicationResponse;
-import me.miv.toyserver.common.response.ApplicationResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

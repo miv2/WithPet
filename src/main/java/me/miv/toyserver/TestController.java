@@ -4,6 +4,7 @@ import me.miv.toyserver.common.response.ApplicationResponse;
 import me.miv.toyserver.common.response.ApplicationResult;
 import me.miv.toyserver.file.FileUploadService;
 import me.miv.toyserver.member.service.MemberService;
+import me.miv.toyserver.provider.kakao.KaKaoService;
 import me.miv.toyserver.security.provider.JwtTokenProvider;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,16 +16,17 @@ public class TestController {
     private final MemberService memberService;
     private final JwtTokenProvider jwtTokenProvider;
     private final FileUploadService fileUploadService;
+    private final KaKaoService kaKaoService;
 
-    public TestController(MemberService memberService, JwtTokenProvider jwtTokenProvider, FileUploadService fileUploadService) {
+    public TestController(MemberService memberService, JwtTokenProvider jwtTokenProvider, FileUploadService fileUploadService, KaKaoService kaKaoService) {
         this.memberService = memberService;
         this.jwtTokenProvider = jwtTokenProvider;
         this.fileUploadService = fileUploadService;
+        this.kaKaoService = kaKaoService;
     }
 
     @GetMapping
     public ApplicationResponse getTest() {
-        System.out.println("테스트");
         return ApplicationResponse.ok("Test API", "");
     }
 

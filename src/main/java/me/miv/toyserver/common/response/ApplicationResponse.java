@@ -1,21 +1,6 @@
 package me.miv.toyserver.common.response;
 
-public class ApplicationResponse<T> {
-    private final ApplicationResult result;
-    private final T payload;
-
-    public ApplicationResponse(ApplicationResult result, T payload) {
-        this.result = result;
-        this.payload = payload;
-    }
-
-    public ApplicationResult getResult() {
-        return result;
-    }
-
-    public T getPayload() {
-        return payload;
-    }
+public record ApplicationResponse<T>(ApplicationResult result, T payload) {
 
     public static <T> ApplicationResponse<T> ok(String message, T payload) {
         return new ApplicationResponse<>(ApplicationResult.ok(message), payload);

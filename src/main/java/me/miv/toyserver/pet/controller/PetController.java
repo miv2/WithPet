@@ -25,11 +25,10 @@ public class PetController {
     }
 
     @PostMapping
-    public ApplicationResponse addPetInformation(@AuthenticationPrincipal MemberDetails memberDetails,
+    public ApplicationResponse addPetInformation(@RequestParam() Long memberId,
                                                 @RequestPart(value = "petAddRequest") PetAddRequest petAddRequest,
                                                  @RequestPart(value = "profileImage") MultipartFile profileImage) throws Exception {
-        Member member = memberDetails.getMember();
-        return ApplicationResponse.ok("반려견 정보 저장", petService.addUserPetInto(petAddRequest, profileImage, member));
+        return ApplicationResponse.ok("반려견 정보 저장", petService.addUserPetInto(petAddRequest, profileImage, memberId));
     }
 
 }

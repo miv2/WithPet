@@ -1,4 +1,4 @@
-package me.miv.toyserver.AppInformation;
+package me.miv.toyserver.appInformation;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
