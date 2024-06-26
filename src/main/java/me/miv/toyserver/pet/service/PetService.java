@@ -41,7 +41,7 @@ public class PetService {
     }
 
     @Transactional
-    public String addUserPetInto(PetAddRequest petAddRequest, MultipartFile profileImage, Long memberId) throws Exception {
+    public String addUserPetInto(PetAddRequest petAddRequest, MultipartFile profileImage) throws Exception {
         Boolean existsByMemberId = petJpaRepository.existsByMemberId(petAddRequest.getMemberId());
 
         if(existsByMemberId) {
@@ -60,7 +60,7 @@ public class PetService {
 
         // 등급 변경
         Role roleByType = roleRepository.findRoleByType(RoleType.ROLE_NORMAL);
-        Member member = memberRepository.findByMemberId(memberId);
+        Member member = memberRepository.findByMemberId(petAddRequest.getMemberId());
         member.setRole(roleByType);
         memberJpaRepository.save(member);
         return "반려견 정보가 입력되었습니다.";
