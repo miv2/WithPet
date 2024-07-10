@@ -1,5 +1,7 @@
 package me.miv.toyserver.pet.controller;
 
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import me.miv.toyserver.common.response.ApplicationResponse;
 import me.miv.toyserver.member.domain.Member;
 import me.miv.toyserver.pet.dto.request.PetAddRequest;
@@ -25,8 +27,9 @@ public class PetController {
     }
 
     @PostMapping("/save")
-    public ApplicationResponse addPetInformation(@RequestPart(value = "petAddRequest") PetAddRequest petAddRequest,
-                                                 @RequestPart(value = "profileImage") MultipartFile profileImage) throws Exception {
+    public ApplicationResponse addPetInformation(
+            @RequestPart(value = "petAddRequest") PetAddRequest petAddRequest,
+            @RequestPart(value = "profileImage", required = false) MultipartFile profileImage) {
         return ApplicationResponse.ok("반려견 정보 저장", petService.addUserPetInto(petAddRequest, profileImage));
     }
 

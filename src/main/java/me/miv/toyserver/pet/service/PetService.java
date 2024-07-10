@@ -41,7 +41,7 @@ public class PetService {
     }
 
     @Transactional
-    public String addUserPetInto(PetAddRequest petAddRequest, MultipartFile profileImage) throws Exception {
+    public String addUserPetInto(PetAddRequest petAddRequest, MultipartFile profileImage) {
         Boolean existsByMemberId = petJpaRepository.existsByMemberId(petAddRequest.getMemberId());
 
         if(existsByMemberId) {
@@ -51,7 +51,7 @@ public class PetService {
 
         String imageFileName = "";
 
-        if(!profileImage.isEmpty()) {
+        if(profileImage != null && !profileImage.isEmpty()) {
             imageFileName = fileUploadService.fileUpload(profileImage);
         }
 
