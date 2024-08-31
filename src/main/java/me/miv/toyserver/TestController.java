@@ -17,17 +17,19 @@ public class TestController {
     private final JwtTokenProvider jwtTokenProvider;
     private final FileUploadService fileUploadService;
     private final KaKaoService kaKaoService;
+    private final TestService testService;
 
-    public TestController(MemberService memberService, JwtTokenProvider jwtTokenProvider, FileUploadService fileUploadService, KaKaoService kaKaoService) {
+    public TestController(MemberService memberService, JwtTokenProvider jwtTokenProvider, FileUploadService fileUploadService, KaKaoService kaKaoService, TestService testService) {
         this.memberService = memberService;
         this.jwtTokenProvider = jwtTokenProvider;
         this.fileUploadService = fileUploadService;
         this.kaKaoService = kaKaoService;
+        this.testService = testService;
     }
 
     @GetMapping
     public ApplicationResponse getTest() {
-        return ApplicationResponse.ok("Test API", "");
+        return ApplicationResponse.ok("Test API", testService.test());
     }
 
     @PostMapping("/upload")

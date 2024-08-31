@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import me.miv.toyserver.common.response.ApplicationResponse;
 import me.miv.toyserver.member.domain.Member;
 import me.miv.toyserver.pet.dto.request.PetAddRequest;
+import me.miv.toyserver.pet.dto.request.PetUpdateRequest;
 import me.miv.toyserver.pet.service.PetService;
 import me.miv.toyserver.security.domain.MemberDetails;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -31,6 +32,13 @@ public class PetController {
             @RequestPart(value = "petAddRequest") PetAddRequest petAddRequest,
             @RequestPart(value = "profileImage", required = false) MultipartFile profileImage) {
         return ApplicationResponse.ok("반려견 정보 저장", petService.addUserPetInto(petAddRequest, profileImage));
+    }
+
+    @PutMapping
+    public ApplicationResponse updatePetInformation(
+            @RequestPart(value = "petUpdateRequest") PetUpdateRequest petUpdateRequest,
+            @RequestPart(value = "profileImage", required = false) MultipartFile profileImage) {
+        return ApplicationResponse.ok("반려견 정보 수정", petService.updateUserPetInfo(petUpdateRequest, profileImage));
     }
 
 }

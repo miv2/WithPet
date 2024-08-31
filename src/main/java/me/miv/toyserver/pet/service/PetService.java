@@ -45,7 +45,7 @@ public class PetService {
         Boolean existsByMemberId = petJpaRepository.existsByMemberId(petAddRequest.getMemberId());
 
         if(existsByMemberId) {
-            Exception exception = new Exception("이미 등록된 정보가 있습니다.");
+            Exception exception = new Exception("이미 등록된 반려견 정보가 있습니다.");
             return exception.getMessage();
         }
 
@@ -63,15 +63,16 @@ public class PetService {
         Member member = memberRepository.findByMemberId(petAddRequest.getMemberId());
         member.setRole(roleByType);
         memberJpaRepository.save(member);
+
         return "반려견 정보가 입력되었습니다.";
     }
 
     @Transactional
-    public String updateUserPetInfo(PetUpdateRequest petUpdateRequest, MultipartFile profileImage) throws Exception {
+    public String updateUserPetInfo(PetUpdateRequest petUpdateRequest, MultipartFile profileImage) {
         Pet pet = get(petUpdateRequest.getUserPetInfoId());
 
         if(ObjectUtils.isEmpty(pet)) {
-            Exception exception = new Exception("등록된 정보가 없습니다.");
+            Exception exception = new Exception("등록된 반려견 정보가 없습니다.");
             return exception.getMessage();
         }
 
@@ -88,6 +89,6 @@ public class PetService {
         pet.setProfileImage(imageFileName);
         petJpaRepository.save(pet);
 
-        return "";
+        return "반려견 정보가 수정되었습니다.";
     }
 }

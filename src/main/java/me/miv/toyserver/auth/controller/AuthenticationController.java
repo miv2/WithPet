@@ -28,7 +28,7 @@ public class AuthenticationController {
     @PostMapping("/sign-in")
     public ApplicationResponse signIn(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
         authenticationService.authentication(loginRequest, response);
-        return ApplicationResponse.ok("로그인",  "");
+        return ApplicationResponse.ok("로그인",  true);
     }
 
     @GetMapping("/check/duplicate")
@@ -48,7 +48,7 @@ public class AuthenticationController {
 
     @ExceptionHandler
     public ApplicationResponse handleMemberAuthenticationException(MemberAuthenticationException exception) {
-        return ApplicationResponse.ok(exception.getMessage(), "");
+        return ApplicationResponse.ok(exception.getMessage(), false);
     }
 
 }

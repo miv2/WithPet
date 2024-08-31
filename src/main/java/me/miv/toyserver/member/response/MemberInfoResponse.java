@@ -1,6 +1,7 @@
 package me.miv.toyserver.member.response;
 
 import me.miv.toyserver.member.domain.Member;
+import me.miv.toyserver.region.domain.Region;
 
 public class MemberInfoResponse {
     private Long id;
@@ -10,13 +11,16 @@ public class MemberInfoResponse {
     private int age;
     private String role;
 
-    public MemberInfoResponse(Member member) {
+    private Region region;
+
+    public MemberInfoResponse(Member member, Region region) {
         this.id = member.getId();
         this.loginId = member.getLoginId();
         this.nickName = member.getNickName();
         this.sexType = member.getSexType().toString();
         this.age = member.getAge();
         this.role = member.getRole().getRoleName();
+        this.region = region;
     }
 
     public Long getId() {
@@ -41,5 +45,9 @@ public class MemberInfoResponse {
 
     public String getRole() {
         return role;
+    }
+
+    public Region getRegion() {
+        return region;
     }
 }

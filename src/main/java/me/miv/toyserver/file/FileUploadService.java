@@ -16,8 +16,8 @@ import java.util.UUID;
 @Service
 public class FileUploadService {
 
-    //public static final String PATH = "C:\\Users\\cu_bo\\OneDrive\\바탕 화면\\media\\images";
-    public static final String PATH = "/home/git/withPet/images";
+    //public static final String PATH =   /home/git/withPet/images
+    public static final String PATH = "C:\\Users\\cu_bo\\OneDrive\\바탕 화면\\media\\images";
     public static final String TEST = "C:/Users/cu_bo/OneDrive/바탕 화면";
 
     public String fileUpload(MultipartFile multipartFile) {
